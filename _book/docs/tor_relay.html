@@ -1,0 +1,332 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>torのリレー機能の設定と有効化 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="software.html">
+            
+                <a href="software.html">
+            
+                    
+                    必要ソフトウェアと環境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    torによる匿名スクレイピング
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" >
+            
+                <span>
+            
+                    
+                    torのインストール
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.2" data-path="tor_relay.html">
+            
+                <a href="tor_relay.html">
+            
+                    
+                    torのリレー機能の設定と有効化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" >
+            
+                <span>
+            
+                    
+                    torのポート開放
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >torのリレー機能の設定と有効化</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="tor&#x306E;&#x30EA;&#x30EC;&#x30FC;&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x8A2D;&#x5B9A;">tor&#x306E;&#x30EA;&#x30EC;&#x30FC;&#x30B5;&#x30FC;&#x30D0;&#x306E;&#x8A2D;&#x5B9A;</h1>
+<h2 id="&#x8A2D;&#x5B9A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x7DE8;&#x96C6;&#x3059;&#x308B;">&#x8A2D;&#x5B9A;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x7DE8;&#x96C6;&#x3059;&#x308B;</h2>
+<p> &#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;<code>/etc/tor/torrc</code>&#x306B;&#x3042;&#x308B;&#x306E;&#x3067;&#x7DE8;&#x96C6;&#x3057;&#x307E;&#x3059;</p>
+<p> tor&#x306F;&#x4E16;&#x754C;&#x4E2D;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x304C;&#x63A5;&#x7D9A;&#x3057;&#x3066;&#x3001;&#x69D8;&#x3005;&#x306A;&#x306B;&#x901A;&#x4FE1;&#x7D4C;&#x8DEF;&#x3092;&#x30DB;&#x30C3;&#x30D7;&#x3059;&#x308B;&#x306E;&#x3067;&#x3001;&#x767A;&#x4FE1;&#x8005;&#x304C;&#x8AB0;&#x3060;&#x304B;&#x308F;&#x304B;&#x3089;&#x306A;&#x304F;&#x306A;&#x308B;&#x6A5F;&#x80FD;&#x304C;&#x3042;&#x3063;&#x3066;&#x3001;&#x305D;&#x306E;&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x306F;&#x6709;&#x5FD7;&#x306E;&#x30B3;&#x30F3;&#x30D4;&#x30E5;&#x30FC;&#x30BF;&#x30EA;&#x30BD;&#x30FC;&#x30B9;&#x306B;&#x3088;&#x3063;&#x3066;&#x306A;&#x308A;&#x3063;&#x305F;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;  </p>
+<p> torrc&#x306E;&#x8A2D;&#x5B9A;&#x3092;&#x3053;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;  </p>
+<p> &#x6B86;&#x3069;&#x304C;&#x30B3;&#x30E1;&#x30F3;&#x30C8;&#x30A2;&#x30A6;&#x30C8;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x3061;&#x3083;&#x3093;&#x3068;&#x8A18;&#x8FF0;&#x3059;&#x308B;&#x3079;&#x304D;&#x3068;&#x3053;&#x308D;&#x306F;&#x5C11;&#x306A;&#x3044;&#x3067;&#x3059;&#x3002;  </p>
+<pre><code class="lang-console">SOCKSPort 9050
+ControlSocket 0
+ControlPort 9051
+ORPort 9001
+Nickname hogeeeeeeeeee
+ExitRelay 0
+ExitPolicy reject *:*
+</code></pre>
+<h2 id="tor&#x3092;&#x518D;&#x8D77;&#x52D5;&#x3059;&#x308B;">tor&#x3092;&#x518D;&#x8D77;&#x52D5;&#x3059;&#x308B;</h2>
+<pre><code class="lang-console">$ sudo systemctl restart tor
+</code></pre>
+<h2 id="&#x63A5;&#x7D9A;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3059;&#x308B;">&#x63A5;&#x7D9A;&#x3092;&#x30C6;&#x30B9;&#x30C8;&#x3059;&#x308B;</h2>
+<pre><code class="lang-console">$ curl --socks5-hostname localhost:9050 https://check.torproject.org | head -n 10
+</code></pre>
+<p>&#x3053;&#x3053;&#x3067;&#x6210;&#x529F;&#x3068;&#x51FA;&#x3066;&#x3044;&#x308C;&#x3070;OK&#x3067;&#x3059;</p>
+<pre><code class="lang-console">&lt;html lang=&quot;en_US&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+  &lt;title&gt;
+      Congratulations. This browser is configured to use Tor.
+1&lt;/title&gt;
+</code></pre>
+<h2 id="nyx&#x3067;&#x4F7F;&#x7528;&#x72B6;&#x6CC1;&#x3092;&#x898B;&#x308B;">nyx&#x3067;&#x4F7F;&#x7528;&#x72B6;&#x6CC1;&#x3092;&#x898B;&#x308B;</h2>
+<p>tor&#x30CD;&#x30C3;&#x30C8;&#x30EF;&#x30FC;&#x30AF;&#x306E;&#x30B9;&#x30C6;&#x30FC;&#x30BF;&#x30B9;nyx&#x3067;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;  </p>
+<p>nyx&#x306F;<code>tor-arm</code>&#x3068;&#x3044;&#x3046;&#x30D1;&#x30C3;&#x30B1;&#x30FC;&#x30B8;&#x306B;&#x7D44;&#x307F;&#x8FBC;&#x307E;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;</p>
+<pre><code class="lang-console">$ sudo apt install tor-arm
+</code></pre>
+<p>&#x5B9F;&#x884C;  </p>
+<pre><code class="lang-console">$ sudo nyx
+</code></pre>
+<div align="center">
+  <img width="700px" src="https://user-images.githubusercontent.com/4949982/41478912-6770a38e-7104-11e8-9fb1-49187c243b67.png">
+</div>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"torのリレー機能の設定と有効化","level":"1.3.2","depth":2,"next":{"title":"torのポート開放","level":"1.3.3","depth":2,"ref":"","articles":[]},"previous":{"title":"torのインストール","level":"1.3.1","depth":2,"ref":"","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"docs/tor_relay.md","mtime":"2018-06-15T16:28:22.495Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-15T13:27:18.782Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
